@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cityBikesFragment">
+
+
+    <fragment
+        android:id="@+id/cityBikesFragment"
+        android:name="com.example.citybikes.ui.CityBikesFragment"
+        android:label="CityBikesFragment" >
+        <action
+            android:id="@+id/action_cityBikesFragment_to_cityBikesDetailsFragment"
+            app:destination="@id/cityBikesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityBikesDetailsFragment"
+        android:name="com.example.citybikes.ui.CityBikesDetailsFragment"
+        android:label="CityBikesDetailsFragment" >
+        <action
+            android:id="@+id/action_cityBikesDetailsFragment_to_cityBikesFragment"
+            app:destination="@id/cityBikesFragment" />
+    </fragment>
+</navigation>
