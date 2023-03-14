@@ -9,11 +9,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.citybikes.R
 import com.example.citybikes.adapter.MyAdapter
 import com.example.citybikes.databinding.FragmentCityBikesBinding
 import com.example.citybikes.model.Network
@@ -22,7 +20,7 @@ import com.example.citybikes.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CityBikesFragment: Fragment() {
+class CityBikesFragment : Fragment() {
     private var _binding: FragmentCityBikesBinding? = null
     private val binding by lazy { _binding!! }
     private val viewModel by viewModels<CityBikesViewModel>()
@@ -35,7 +33,7 @@ class CityBikesFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCityBikesBinding.inflate(inflater,container,false)
+        _binding = FragmentCityBikesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -63,11 +61,18 @@ class CityBikesFragment: Fragment() {
             }
         })
 
-        bikesAdapter = MyAdapter(object: MyAdapter.OnClickListener{
+        bikesAdapter = MyAdapter(object : MyAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 val companyName = responseBike[position].name
                 val companyLocation = responseBike[position].location
-                val direction = CityBikesFragmentDirections.actionCityBikesFragmentToCityBikesDetailsFragment(companyLocation.latitude.toFloat(),companyLocation.longitude.toFloat(),companyName,companyLocation.city,companyLocation.country)
+                val direction =
+                    CityBikesFragmentDirections.actionCityBikesFragmentToCityBikesDetailsFragment(
+                        companyLocation.latitude.toFloat(),
+                        companyLocation.longitude.toFloat(),
+                        companyName,
+                        companyLocation.city,
+                        companyLocation.country
+                    )
                 findNavController().navigate(direction)
             }
 

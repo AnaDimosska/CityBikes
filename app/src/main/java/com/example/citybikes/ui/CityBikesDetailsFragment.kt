@@ -41,7 +41,7 @@ class CityBikesDetailsFragment : Fragment() {
             val city = LatLng(args.lat.toDouble(), args.lon.toDouble())
             bouncedBuilder.include(city)
             val marker =
-                googleMap.addMarker(MarkerOptions().position(city).title("Marker in Sydney"))
+                googleMap.addMarker(MarkerOptions().position(city))
             googleMap.animateCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     bouncedBuilder.build(),
@@ -65,12 +65,14 @@ class CityBikesDetailsFragment : Fragment() {
             }
         }
         mapFragment?.getMapAsync(callback)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                val direction = CityBikesDetailsFragmentDirections.actionCityBikesDetailsFragmentToCityBikesFragment()
-                findNavController().navigate(direction)
-            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val direction =
+                        CityBikesDetailsFragmentDirections.actionCityBikesDetailsFragmentToCityBikesFragment()
+                    findNavController().navigate(direction)
+                }
 
-        })
+            })
     }
 }

@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CityBikesViewModel @Inject constructor(
     val cityBikesRepo: Repository
-): ViewModel(){
+) : ViewModel() {
     var bikesList: MutableLiveData<Resource<List<Network>>> = MutableLiveData()
 
     init {
@@ -38,8 +38,8 @@ class CityBikesViewModel @Inject constructor(
             response.body().let { companiesResponse ->
                 return Resource.Success(companiesResponse?.networks)
             }
-        } else if(response.code() == 404){
-            Log.d("viewmodel","error")
+        } else if (response.code() == 404) {
+            Log.d("viewmodel", "error")
         }
         return Resource.Error(response.message())
     }
