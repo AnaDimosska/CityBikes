@@ -42,10 +42,6 @@ object NetworkModule {
     }
 
     @Provides
-    @IntoSet
-    fun apiKeyInterceptor(apiKeyInterceptor: ApiKeyInterceptor) : Interceptor = apiKeyInterceptor
-
-    @Provides
     @Singleton
     fun retrofit (
         okHttpClient: OkHttpClient

@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:text="fragment one"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btn"
+        app:queryHint="Search movie"
+        android:layout_height="wrap_content"
+        android:theme="@style/Widget.AppCompat.SearchView"
+        android:iconifiedByDefault="false" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bikes_rv"
         android:layout_width="match_parent"
-        android:text="click"
         android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:id="@+id/paginationProgressBar"
+        style="?attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:background="@android:color/transparent" />
 
 </LinearLayout>

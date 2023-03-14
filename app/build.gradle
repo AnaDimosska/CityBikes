@@ -4,10 +4,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
-    namespace 'com.example.citybikes'
     compileSdk 33
 
     defaultConfig {
@@ -51,6 +52,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     kapt "androidx.room:room-compiler:2.5.0"
 
     // Kotlin Extensions and Coroutines support for Room
@@ -80,4 +82,5 @@ dependencies {
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.45"
     kapt "com.google.dagger:hilt-android-compiler:2.45"
+
 }
