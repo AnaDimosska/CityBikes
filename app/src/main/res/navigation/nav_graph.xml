@@ -12,12 +12,6 @@
         <action
             android:id="@+id/action_cityBikesFragment_to_cityBikesDetailsFragment"
             app:destination="@id/cityBikesDetailsFragment" />
-        <argument
-            android:name="lat"
-            app:argType="float" />
-        <argument
-            android:name="lon"
-            app:argType="float" />
     </fragment>
     <fragment
         android:id="@+id/cityBikesDetailsFragment"
@@ -32,5 +26,14 @@
         <argument
             android:name="lon"
             app:argType="float" />
+        <argument
+            android:name="companyName"
+            app:argType="string" />
+        <argument
+            android:name="companyCity"
+            app:argType="string" />
+        <argument
+            android:name="companyCountryCode"
+            app:argType="string" />
     </fragment>
 </navigation>

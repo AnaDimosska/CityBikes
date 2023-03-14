@@ -14,19 +14,19 @@ import com.example.citybikes.model.Network
 import com.example.citybikes.util.MyDiffCallback
 
 class MyAdapter(val onClickListener: OnClickListener) :
-    RecyclerView.Adapter<MyAdapter.MovieViewHolder>() {
+    RecyclerView.Adapter<MyAdapter.BikeViewHolder>() {
 
     interface OnClickListener {
         fun onItemClick(position: Int)
     }
 
-    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class BikeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private val differCallback = MyDiffCallback()
 
     val differ = AsyncListDiffer(this, differCallback)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BikeViewHolder {
+        return BikeViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.bike_item,
                 parent,
@@ -66,7 +66,7 @@ class MyAdapter(val onClickListener: OnClickListener) :
         }
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BikeViewHolder, position: Int) {
         val bike = differ.currentList[position]
         val countryCode = bike.location.city
         val twoLetterCode = bike.location.country

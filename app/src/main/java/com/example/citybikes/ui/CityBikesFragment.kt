@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.citybikes.R
@@ -27,7 +28,7 @@ class CityBikesFragment: Fragment() {
     private val viewModel by viewModels<CityBikesViewModel>()
     lateinit var bikesAdapter: MyAdapter
     private lateinit var differ: AsyncListDiffer<Network>
-    var responseMovie = arrayListOf<Network>()
+    var responseBike = mutableListOf<Network>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +41,13 @@ class CityBikesFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.trendingMovies.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.bikesList.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
                     binding.paginationProgressBar.visibility = View.INVISIBLE
-                    response.data?.let { moviesResponse ->
-                        responseMovie.addAll(moviesResponse)
-                        bikesAdapter.differ.submitList(moviesResponse)
+                    response.data?.let { bikesResponse ->
+                        responseBike.addAll(bikesResponse)
+                        bikesAdapter.differ.submitList(bikesResponse)
                     }
                 }
                 is Resource.Error -> {
@@ -64,15 +65,10 @@ class CityBikesFragment: Fragment() {
 
         bikesAdapter = MyAdapter(object: MyAdapter.OnClickListener{
             override fun onItemClick(position: Int) {
-                val movieLocation = responseMovie[position].location
-                val bundle = Bundle().apply {
-                    putString("lat", movieLocation.latitude.toString())
-                    putString("lon", movieLocation.longitude.toString())
-                }
-                val fragment = CityBikesDetailsFragment()
-                fragment.arguments = bundle
-                //CityBikesFragmentDirections.actionCityBikesFragmentToCityBikesDetailsFragment(movieLocation.latitude.toFloat(),movieLocation.longitude.toFloat())
-                Navigation.findNavController(view).navigate(R.id.cityBikesDetailsFragment)
+                val companyName = responseBike[position].name
+                val companyLocation = responseBike[position].location
+                val direction = CityBikesFragmentDirections.actionCityBikesFragmentToCityBikesDetailsFragment(companyLocation.latitude.toFloat(),companyLocation.longitude.toFloat(),companyName,companyLocation.city,companyLocation.country)
+                findNavController().navigate(direction)
             }
 
         })
@@ -85,7 +81,6 @@ class CityBikesFragment: Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Not used
                 return false
             }
 

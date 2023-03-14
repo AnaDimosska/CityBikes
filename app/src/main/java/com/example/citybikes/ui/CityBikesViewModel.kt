@@ -17,20 +17,21 @@ import javax.inject.Inject
 class CityBikesViewModel @Inject constructor(
     val cityBikesRepo: Repository
 ): ViewModel(){
-    val trendingMovies: MutableLiveData<Resource<List<Network>>> = MutableLiveData()
+    var bikesList: MutableLiveData<Resource<List<Network>>> = MutableLiveData()
 
     init {
-        getTrendingMovies()
+        getAllBikeCompanies()
     }
 
-    fun getTrendingMovies() = viewModelScope.launch {
-        trendingMovies.postValue(Resource.Loading())
+    fun getAllBikeCompanies() = viewModelScope.launch {
+        bikesList.postValue(Resource.Loading())
         val response = cityBikesRepo.getAllCityBikes()
-        trendingMovies.postValue(handleResponse(response))
+        bikesList.postValue(handleResponse(response))
     }
+
 
     /**
-     * This handle response we can choose if we get straight from api or from room Resource.Success(movieResponse?.results)
+     * This handle response we can choose if we get straight from api or from room Resource.Success(bikesResponse?.results)
      */
     private fun handleResponse(response: Response<BikesResponse>): Resource<List<Network>>? {
         if (response.isSuccessful) {
